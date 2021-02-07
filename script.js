@@ -12,20 +12,16 @@ const searched = () => {
 };
 const displayFoods = (foods) => {
 	const foodsDiv = document.getElementById('foods');
-	if (foodsDiv == null) {
-		alert('Sorry!!! No food found');
-	} else {
-		foods.forEach((food) => {
-			const foodDiv = document.createElement('div');
-			foodDiv.className = 'food';
-			const foodInfo = `<div onclick = "displayCountryDetails('${food.idMeal}')">
-            <img src="${food.strMealThumb}">
-            <h3 class = 'food-name'>${food.strMeal}</h3></div>
-        `;
-			foodDiv.innerHTML = foodInfo;
-			foodsDiv.appendChild(foodDiv);
-		});
-	}
+	foods.forEach((food) => {
+		const foodDiv = document.createElement('div');
+		foodDiv.className = 'food';
+		const foodInfo = `<div onclick = "displayCountryDetails('${food.idMeal}')">
+        <img src="${food.strMealThumb}">
+        <h3 class = 'food-name'>${food.strMeal}</h3></div>
+    `;
+		foodDiv.innerHTML = foodInfo;
+		foodsDiv.appendChild(foodDiv);
+	});
 };
 const displayCountryDetails = (id) => {
 	const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -63,5 +59,4 @@ const renderCountryInfo = (food) => {
         
         
     `;
-	console.log(foodDiv);
 };
