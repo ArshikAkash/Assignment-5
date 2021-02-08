@@ -1,7 +1,7 @@
 const searched = () => {
 	const inputText = document.getElementById('inputText');
 	if (inputText.value === '') {
-		alert('Sorry!!! No food found');
+		alert('Please give your order.');
 	} else {
 		const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${inputText.value}`;
 
@@ -11,17 +11,21 @@ const searched = () => {
 	}
 };
 const displayFoods = (foods) => {
-	const foodsDiv = document.getElementById('foods');
-	foods.forEach((food) => {
-		const foodDiv = document.createElement('div');
-		foodDiv.className = 'food';
-		const foodInfo = `<div onclick = "displayCountryDetails('${food.idMeal}')">
+	if (foods === null) {
+		alert('Sorry!!! This Food Is Not Available');
+	} else {
+		const foodsDiv = document.getElementById('foods');
+		foods.forEach((food) => {
+			const foodDiv = document.createElement('div');
+			foodDiv.className = 'food';
+			const foodInfo = `<div onclick = "displayCountryDetails('${food.idMeal}')">
         <img src="${food.strMealThumb}">
         <h3 class = 'food-name'>${food.strMeal}</h3></div>
     `;
-		foodDiv.innerHTML = foodInfo;
-		foodsDiv.appendChild(foodDiv);
-	});
+			foodDiv.innerHTML = foodInfo;
+			foodsDiv.appendChild(foodDiv);
+		});
+	}
 };
 const displayCountryDetails = (id) => {
 	const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
